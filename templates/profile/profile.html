@@ -1,0 +1,63 @@
+{% extends 'flatpages/default.html' %}
+{% load static %}
+{% block title %}
+Profile
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<section class="profile-detail">
+	<div class="container">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="basic-information">
+					<div class="col-md-3 col-sm-3" style="margin-bottom: 30px; padding-left: 0px;">
+						<img src="{% static 'img/user.jpg' %}" alt="" class="img-responsive">
+					</div>
+					<div class="col-md-9 col-sm-9">
+						<div class="profile-content">
+							<ul class="information">
+								<li><span>Name:</span>{{name}}</li>
+								<li><span>Email:</span>{{email}}</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="basic-information">
+						<button class="btn seub-btn"><a href=/profile/response>Перейти к откликам на мои объявления</a></button>
+					</div>
+
+					<div class="basic-information">
+						<h2>Мои объявления:</h2>
+					</div>
+
+					<div class="contener">
+						<div class="basic-information">
+							<div class="container">
+							{% if author_posts %}
+							{% for post in author_posts %}
+								<div class="col-md-4 col-sm-4">
+									<div class="features-content">
+										<span class="box1"><span aria-hidden="true" class="icon-dial"></span></span>
+										<h3>{{post.title|truncatechars:15}}</h3>
+										<p>{{post.textPost|truncatechars:30}}</p>
+										<p>{{post.timePost|date:'d.m.Y'}}</p><hr>
+										<button class="btn"><a href=/{{post.id}}>Перейти к объявлению</a></button><br>
+										<button class="btn"><a href=/update/{{post.id}}/>Редактировать</a></button>
+									</div>
+								</div>
+								{% endfor %}
+							{% else %}
+								<a href="../create/" class="btn btn-primary">Создать обявление!</a>
+							{% endif %}
+							</div>
+							<div class="card text-center">{% include 'paginator.html' %}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock content %}

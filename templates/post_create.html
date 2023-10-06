@@ -1,0 +1,14 @@
+{% extends 'flatpages/default.html' %}
+{% block title %}
+Post create
+{% endblock title %}
+{% block content %}
+<section class="features">
+    <form class="text-center" method="POST" action= "" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label class="text-center">Создание объявления:</label>
+        {{ form.text }}
+        <input class="btn" type="submit" value="Создать">
+    </form>
+</section>
+{% endblock content %}

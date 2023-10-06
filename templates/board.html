@@ -1,0 +1,61 @@
+{% extends 'flatpages/default.html' %}
+{% block title %}
+Board
+{% endblock title %}
+
+{% block content %}
+<section class="features">
+	<div class="container">
+		{% for post in board %}
+		<div class="col-md-4 col-sm-4">
+			<div class="features-content">
+				<span class="box1"><span aria-hidden="true" class="icon-dial"></span></span>
+				<h3>{{post.title|truncatechars:15}}</h3>
+				<p>{{post.textPost|truncatechars:30}}</p>
+				<p>{{ post.author }} {{ post.timePost|date:'d.m.Y' }}</p>
+				<a href=/{{post.id}}>Читать далее</a>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+<div class="card text-center">
+	{% include 'paginator.html' %}
+</div>
+
+<section class="main-banner" style="background:#242c36 no-repeat">
+    <div class="container">
+		<div class="caption">
+			<h2>Найти объявление:</h2>
+			<form>
+				<fieldset class="form-row align-items-center">
+					{{ filter.form }}
+					<div class="col border-right">
+						<input type="submit" class="btn seub-btn" value="submit" />
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</section>
+
+<section class="features">
+	<div class="container">
+		{% for post in filter.qs %}
+		<div class="col-md-4 col-sm-4">
+			<div class="features-content">
+				<span class="box1"><span aria-hidden="true" class="icon-dial"></span></span>
+				<h3>{{post.title|truncatechars:15}}</h3>
+				<p>{{post.textPost|truncatechars:30}}</p>
+				<p>{{ post.author }} {{ post.timePost|date:'d.m.Y' }}</p>
+				<a href=/{{post.id}}>Читать далее</a>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+<div class="card text-center">
+	{% include 'paginator.html' %}
+</div>
+
+{% endblock content %}

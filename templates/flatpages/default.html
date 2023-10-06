@@ -1,0 +1,68 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Bulletin board</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- All Plugin Css -->
+		<link rel="stylesheet" href="{% static 'css/plugins.css' %}">
+
+		<!-- Style & Common Css -->
+		<link rel="stylesheet" href="{% static 'css/common.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    </head>
+
+    <body>
+
+		<!-- Navigation Start  -->
+		<nav class="navbar navbar-default navbar-sticky bootsnav" style="background:#242c36">
+
+			<div class="container">
+				<!-- Start Header Navigation -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+						<i class="fa fa-bars"></i>
+					</button>
+					<a class="navbar-brand" href=""><img src="https://x-lines.ru/letters/i/cyrillicbasic/0001/c40e12/48/0/jigw6w1oeh.png" border="0" /></a>
+				</div>
+				<!-- End Header Navigation -->
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="navbar-menu">
+					<ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+						{% if request.user.is_authenticated %}
+						<li><a href="/">Доска объявлений</a></li>
+						<li><a href="/profile/">Профиль</a></li>
+						<li><a href="/profile/logout/">Выйти</a></li>
+						{% else %}
+						<li><a href="/profile/signup/">Зарегистрироваться</a></li>
+						<li><a href="/profile/login/">Войти</a></li>
+						{% endif %}
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div>
+		</nav>
+		<!-- Navigation End  -->
+
+        <section class="features">{% block content %}{% endblock content %}</section>
+
+		<footer>
+			<div class="container">
+			</div>
+			<div class="copy-right">
+			 <p>&copy;Copyright 2018 Jober Desk | Design By <a href="https://themezhub.com/">ThemezHub</a></p>
+			</div>
+		</footer>
+
+<!--		<script type="text/javascript" src="js/jquery.min.js"></script>-->
+<!--		<script src="js/bootstrap.min.js"></script>-->
+<!--		<script type="text/javascript" src="js/owl.carousel.min.js"></script>-->
+<!--		<script src="js/bootsnav.js"></script>-->
+<!--		<script src="js/main.js"></script>-->
+    </body>
+</html>

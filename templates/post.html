@@ -1,0 +1,55 @@
+{% extends 'flatpages/default.html' %}
+{% block title %}
+Post
+{% endblock title %}
+{% block content %}
+<section class="inner-banner" style="backend:#242c36 url(https://via.placeholder.com/1920x600)no-repeat;">
+	<div class="container">
+		<div class="caption">
+			<h2>{{post_detail.title}}</h2>
+		</div>
+	</div>
+</section>
+<section class="profile-detail">
+	<div class="container">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="basic-information">
+					<p class="text-center">{{post_detail.textPost}}</p><p>
+
+					{% if post_detail.img %}
+						<div class="col-md-3 col-sm-3" style="margin-bottom: 30px; padding-left: 0px;">
+							<img src="{{ post_detail.img.url }}" alt="{{ post_detail.title }}" width='600' height='auto' class="img-responsive">
+						</div>
+					{% endif %}
+
+					{% if post_detail.video %}
+					<video width="600" height="auto" controls>
+						<source src="{{ post_detail.video.url }}" type="video/mp4">
+						<source src="{{ post_detail.video.url }}" type="video/MOV">
+						<source src="{{ post_detail.video.url }}" type="video/avi">
+						<source src="{{ post_detail.video.url }}" type="video/webm">
+						<source src="{{ post_detail.video.url }}" type="video/mkv">
+					</video><br>
+					{% endif %}<br>
+
+					{% if post_detail.file %}
+						<a href="{{ post_detail.file.url }}" download>{{ post_detail.file.name }}</a><br><br>
+					{% endif %}<br>
+
+					<p class="text-right">Категория: {{post_detail.category}}</p>
+					<p class="text-right">{{post_detail.author}} {{post_detail.timePost|date:'d.m.Y'}}</p>
+					<div class="basic-information">
+						<form method="POST">
+							{% csrf_token %}
+							<label class="text-center">Оставте автору отклик на объявление:</label>
+							{{ form }}
+							<input class="btn" type="submit" value="Отпраить">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock content %}

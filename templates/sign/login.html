@@ -1,0 +1,20 @@
+{% extends 'flatpages/default.html' %}
+{% load static %}
+{% block title %}
+login
+{% endblock title %}
+
+{% block content %}
+<section class="login-wrapper">
+    <div class="container">
+		<div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
+			<form method="post">
+				{% csrf_token %}
+				<h2>Для входа в систему, введите логин и пароль:</h2>
+				{{form}}
+				<button type="submit" class="btn btn-primary">Login</button>
+			</form>
+		</div>
+	</div>
+</section>
+{% endblock content %}

@@ -1,0 +1,95 @@
+{% extends 'flatpages/default.html' %}
+{% load static %}
+{% block title %}
+Profile
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<section class="profile-detail">
+	<div class="container">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="basic-information">
+					<div class="basic-information">
+						<h2>Отклики на мои объявления:</h2>
+                    </div>
+					<div class="contener">
+						<div class="basic-information">
+							<div class="container">
+							{% if responses %}
+							{% for response in responses %}
+								<div class="col-md-4 col-sm-4">
+									<div class="features-content">
+										<span class="box1"><span aria-hidden="true" class="icon-dial"></span></span>
+										<h3>{{response.responsePost}}</h3>
+										<p>{{response.textResponse}}</p>
+										<p>{{response.responseUser}}</p>
+										{% if response in not_accept %}
+										<form action=/profile/accept/{{response.pk}} method="Post">
+											{% csrf_token %}
+											<input type="submit" class="btn seub-btn" value="Принять"/>
+										</form>
+										<form action=/profile/delete/{{response.pk}} method="Post">
+											{% csrf_token %}
+											<input type="submit" class="btn seub-btn" value="Удалить"/>
+										</form>
+										{% endif %}
+									</div>
+								</div>
+								{% endfor %}
+							{% else %}
+								<a href="../create/" class="btn btn-primary">Создать обявление!</a>
+							{% endif %}
+							</div>
+							<div class="card text-center">{% include 'paginator.html' %}</div>
+						</div>
+					</div>
+
+					<div class="basic-information">
+						<h2>Найти отклик:</h2>
+                    </div>
+					<div class="contener">
+						<div class="basic-information">
+							<div class="container">
+								{% if responses %}
+								<form>
+									<fieldset class="form-row align-items-center">
+									{{ filter.form }}
+										<div class="col border-right">
+											<input type="submit" class="btn seub-btn" value="submit" />
+										</div>
+									</fieldset>
+								</form>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+
+
+					<div class="contener">
+						<div class="basic-information">
+							<div class="container">
+								{% for response in filter.qs %}
+								<div class="col-md-4 col-sm-4">
+									<div class="features-content">
+										<span class="box1"><span aria-hidden="true" class="icon-dial"></span></span>
+										<h3>{{response.responsePost}}</h3>
+										<p>{{response.textResponse}}</p>
+										<p>{{response.responseUser}}</p>
+									</div>
+								</div>
+								{% empty %}
+								<p>Откликов не найдено</p>
+								{% endfor %}
+							</div>
+							<div class="card text-center">{% include 'paginator.html' %}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock content %}
